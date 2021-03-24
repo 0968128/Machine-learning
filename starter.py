@@ -25,15 +25,12 @@ def extract_from_json_as_np_array(key, json_data):
     return np.array(data_as_array)
 
 
-STUDENTNUMMER = "1234567" # TODO: aanpassen aan je eigen studentnummer
-
-assert STUDENTNUMMER != "1234567", "Verander 1234567 in je eigen studentnummer"
+STUDENTNUMMER = "0968128"
 
 print("STARTER CODE")
 
 # maak een data-object aan om jouw data van de server op te halen
 data = Machine_Learning_Data(STUDENTNUMMER)
-
 
 # UNSUPERVISED LEARNING
 
@@ -99,4 +96,3 @@ Z = np.zeros(100) # dit is een gok dat alles 0 is... kan je zelf voorspellen hoe
 # stuur je voorspelling naar de server om te kijken hoe goed je het gedaan hebt
 classification_test = data.classification_test(Z.tolist()) # tolist zorgt ervoor dat het numpy object uit de predict omgezet wordt naar een 'normale' lijst van 1'en en 0'en
 print("Classificatie accuratie (test): " + str(classification_test))
-
