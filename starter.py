@@ -1,20 +1,7 @@
-"""
-Startercode bij Lesbrief: Machine Learning, CMTPRG01-9
-
-Deze code is geschreven in Python3
-
-Benodigde libraries:
-- NumPy
-- SciPy
-- matplotlib
-- sklearn
-
-"""
 from machinelearningdata import Machine_Learning_Data
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
-
 
 def extract_from_json_as_np_array(key, json_data):
     """ helper functie om data uit de json te halen en om te zetten naar numpy array voor sklearn"""
@@ -26,8 +13,6 @@ def extract_from_json_as_np_array(key, json_data):
 
 
 STUDENTNUMMER = "0968128"
-
-print("STARTER CODE")
 
 # maak een data-object aan om jouw data van de server op te halen
 data = Machine_Learning_Data(STUDENTNUMMER)
