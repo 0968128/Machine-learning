@@ -43,7 +43,6 @@ plt.show()
 
 # TODO: ontdek de clusters mbv kmeans en teken een plot met kleurtjes
 
-
 # SUPERVISED LEARNING
 
 # haal data op voor classificatie
@@ -55,7 +54,6 @@ X = extract_from_json_as_np_array("x", classification_training)
 # dit zijn de werkelijke waarden, daarom kan je die gebruiken om te trainen
 Y = extract_from_json_as_np_array("y", classification_training)
 
-
 # TODO: leer de classificaties
 
 # TODO: voorspel na het trainen de Y-waarden (je gebruikt hiervoor dus niet meer de
@@ -63,7 +61,6 @@ Y = extract_from_json_as_np_array("y", classification_training)
 #       bijvoordeeld Y_predict
 
 # TODO: vergelijk Y_predict met de echte Y om te zien hoe goed je getraind hebt
-
 
 # haal data op om te testen
 classification_test = data.classification_test()
