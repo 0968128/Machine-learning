@@ -6,6 +6,7 @@ NOCACHE = False
 
 # 20-04-2019: server changed to https
 SERVER_URL = "https://programmeren9.cmgt.hr.nl:9000/"
+STUDENTNUMMER = "0968128"
 
 class Machine_Learning_Data():
         """ class om taining en test data op te halen en te sturen naar de server """
@@ -67,7 +68,7 @@ class Machine_Learning_Data():
                     return response.read().decode('utf8')
 
 if __name__ == '__main__':
-    data = Machine_Learning_Data("1234567")
+    data = Machine_Learning_Data(STUDENTNUMMER)
 
     kmeans_training = data.kmeans_traing()
 

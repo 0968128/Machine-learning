@@ -2,6 +2,11 @@ from machinelearningdata import Machine_Learning_Data
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
+from sklearn.naive_bayes import GaussianNB
+
+# first_name = input("Please enter your first name: ")
+# last_name = input("Please enter your last name: ")
+# print(f"Hello, {first_name} {last_name}")
 
 def extract_from_json_as_np_array(key, json_data):
     """ helper functie om data uit de json te halen en om te zetten naar numpy array voor sklearn"""
@@ -11,11 +16,12 @@ def extract_from_json_as_np_array(key, json_data):
 
     return np.array(data_as_array)
 
-
 STUDENTNUMMER = "0968128"
 
 # maak een data-object aan om jouw data van de server op te halen
 data = Machine_Learning_Data(STUDENTNUMMER)
+
+
 
 # UNSUPERVISED LEARNING
 
@@ -25,7 +31,7 @@ kmeans_training = data.clustering_training()
 # extract de x waarden
 X = extract_from_json_as_np_array("x", kmeans_training)
 
-#print(X)
+# print(X)
 
 # slice kolommen voor plotten (let op, dit is de y voor de y-as, niet te verwarren met een y van de data)
 x = X[...,0]
@@ -40,8 +46,9 @@ plt.show()
 
 # TODO: print deze punten uit en omcirkel de mogelijke clusters
 
-
 # TODO: ontdek de clusters mbv kmeans en teken een plot met kleurtjes
+
+
 
 # SUPERVISED LEARNING
 
@@ -53,6 +60,9 @@ X = extract_from_json_as_np_array("x", classification_training)
 
 # dit zijn de werkelijke waarden, daarom kan je die gebruiken om te trainen
 Y = extract_from_json_as_np_array("y", classification_training)
+
+clf = GaussianNB()
+clf.fit(X, Y)
 
 # TODO: leer de classificaties
 
