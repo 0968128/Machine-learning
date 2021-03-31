@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
 from sklearn.naive_bayes import GaussianNB
+from sklearn.cluster import KMeans
 
 # first_name = input("Please enter your first name: ")
 # last_name = input("Please enter your last name: ")
@@ -21,8 +22,7 @@ STUDENTNUMMER = "0968128"
 # maak een data-object aan om jouw data van de server op te halen
 data = Machine_Learning_Data(STUDENTNUMMER)
 
-
-
+# LESBRIEF Deel 1
 # UNSUPERVISED LEARNING
 
 # haal clustering data op
@@ -37,19 +37,24 @@ X = extract_from_json_as_np_array("x", kmeans_training)
 x = X[...,0]
 y = X[...,1]
 
-# teken de punten
-for i in range(len(x)):
-    plt.plot(x[i], y[i], 'k.') # k = zwart
+# Teken als zwarte punten
+# for i in range(len(x)):
+#     plt.plot(x[i], y[i], "k.")
 
-plt.axis([min(x), max(x), min(y), max(y)])
+# ontdek de clusters mbv kmeans en teken een plot met kleurtjes
+colors = ["red", "blue", "green", "yellow", "purple"]
+kmeans = KMeans(len(colors))
+kmeans.fit(X)
+clusters = kmeans.cluster_centers_
+y_km = kmeans.fit_predict(X)
+
+# Teken de punten in clusters
+for i in range(len(colors)):
+    plt.scatter(X[y_km == i, 0], X[y_km == i, 1], color=colors[i])
+
 plt.show()
 
-# TODO: print deze punten uit en omcirkel de mogelijke clusters
-
-# TODO: ontdek de clusters mbv kmeans en teken een plot met kleurtjes
-
-
-
+# LESBRIEF Deel 2
 # SUPERVISED LEARNING
 
 # haal data op voor classificatie
@@ -66,11 +71,14 @@ clf.fit(X, Y)
 
 # TODO: leer de classificaties
 
+
 # TODO: voorspel na het trainen de Y-waarden (je gebruikt hiervoor dus niet meer de
 #       echte Y-waarden, maar enkel de X en je getrainde classifier) en noem deze
 #       bijvoordeeld Y_predict
 
+
 # TODO: vergelijk Y_predict met de echte Y om te zien hoe goed je getraind hebt
+
 
 # haal data op om te testen
 classification_test = data.classification_test()
@@ -82,6 +90,7 @@ X_test = extract_from_json_as_np_array("x", classification_test)
 #       geen echte Y-waarden gekregen hebt.
 #       onderstaande code stuurt je voorspelling naar de server, die je dan
 #       vertelt hoeveel er goed waren.
+
 
 Z = np.zeros(100) # dit is een gok dat alles 0 is... kan je zelf voorspellen hoeveel procent er goed is?
 
