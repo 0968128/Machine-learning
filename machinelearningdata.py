@@ -1,25 +1,20 @@
 import datetime
 import json
 import urllib.request
-
-NOCACHE = False
-
-# 20-04-2019: server changed to https
-SERVER_URL = "https://programmeren9.cmgt.hr.nl:9000/"
-STUDENTNUMMER = "0968128"
+import main as glob
 
 class Machine_Learning_Data():
         """ class om taining en test data op te halen en te sturen naar de server """
 
         def __init__(self, studentnummer=None):
-                self.studentnummer = studentnummer
+                self.studentnummer = glob.student_number
 
-                assert type(studentnummer) is str, "Geef het studentnummer op als String"
-                assert len(studentnummer) == 7 , "Geef (een correct) studentnummer op om de juiste data te krijgen"
+                assert type(glob.student_number) is str, "Geef het studentnummer op als String"
+                assert len(glob.student_number) == 7 , "Geef (een correct) studentnummer op om de juiste data te krijgen"
 
         def get_data(self, url, cache=""):
 
-                if cache != "" and not NOCACHE:
+                if cache != "" and not glob.no_cache:
                         # probeer uit cache te halen en return
                         import os.path
                         if os.path.isfile(cache):
@@ -42,22 +37,22 @@ class Machine_Learning_Data():
                 return data
 
         def clustering_training(self):
-                return self.get_data(SERVER_URL + self.studentnummer + "/clustering/training", self.studentnummer + "-clustering-training")
+                return self.get_data(glob.server_url + self.studentnummer + "/clustering/training", self.studentnummer + "-clustering-training")
 
         def classification_training(self):
-                return self.get_data(SERVER_URL + self.studentnummer + "/classification/training", self.studentnummer + "-classification-training")
+                return self.get_data(glob.server_url + self.studentnummer + "/classification/training", self.studentnummer + "-classification-training")
 
         def classification_test(self, y=None):
                 if y == None:
                         date_string = '{0:%Y-%m-%d}'.format(datetime.datetime.now())  # elke daga andere test-data
-                        return self.get_data(SERVER_URL + self.studentnummer + "/classification/test", self.studentnummer + "-" + date_string + "-classification-test")
+                        return self.get_data(glob.server_url + self.studentnummer + "/classification/test", self.studentnummer + "-" + date_string + "-classification-test")
                 else:
                     assert type(y) is list, "Stuur de classificaties als lijst"
 
                     data_y= json.dumps(y)
                     #print(data_y)
 
-                    req = urllib.request.Request(SERVER_URL + self.studentnummer + "/classification/test",
+                    req = urllib.request.Request(glob.server_url + self.studentnummer + "/classification/test",
                                                  data=data_y.encode('utf8'))
                     req.add_header('Content-Type', 'application/json')
 
@@ -68,7 +63,7 @@ class Machine_Learning_Data():
                     return response.read().decode('utf8')
 
 if __name__ == '__main__':
-    data = Machine_Learning_Data(STUDENTNUMMER)
+    data = Machine_Learning_Data(glob.student_number)
 
     kmeans_training = data.kmeans_traing()
 
