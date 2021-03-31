@@ -18,19 +18,22 @@ X = glob.extract_from_json_as_np_array("x", classification_training)
 # dit zijn de werkelijke waarden, daarom kan je die gebruiken om te trainen
 Y = glob.extract_from_json_as_np_array("y", classification_training)
 
+# TODO: leer de classificaties
 clf = GaussianNB()
 clf.fit(X, Y)
-
-# TODO: leer de classificaties
-
 
 # TODO: voorspel na het trainen de Y-waarden (je gebruikt hiervoor dus niet meer de
 #       echte Y-waarden, maar enkel de X en je getrainde classifier) en noem deze
 #       bijvoordeeld Y_predict
-
+predicted_y = clf.predict(X)
 
 # TODO: vergelijk Y_predict met de echte Y om te zien hoe goed je getraind hebt
+correct_guesses = []
+for i in range(len(predicted_y)):
+    if(predicted_y[i] == Y[i]):
+        correct_guesses.append(predicted_y[i])
 
+print("Classificatie accuratie (echte Y): " + str(len(correct_guesses) / len(Y)))
 
 # haal data op om te testen
 classification_test = data.classification_test()
@@ -43,8 +46,7 @@ X_test = glob.extract_from_json_as_np_array("x", classification_test)
 #       onderstaande code stuurt je voorspelling naar de server, die je dan
 #       vertelt hoeveel er goed waren.
 
-
-Z = np.zeros(100) # dit is een gok dat alles 0 is... kan je zelf voorspellen hoeveel procent er goed is?
+Z = clf.predict(X_test)
 
 # stuur je voorspelling naar de server om te kijken hoe goed je het gedaan hebt
 classification_test = data.classification_test(Z.tolist()) # tolist zorgt ervoor dat het numpy object uit de predict omgezet wordt naar een 'normale' lijst van 1'en en 0'en
