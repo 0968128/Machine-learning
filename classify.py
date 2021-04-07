@@ -18,6 +18,12 @@ X = glob.extract_from_json_as_np_array("x", classification_training)
 # dit zijn de werkelijke waarden, daarom kan je die gebruiken om te trainen
 Y = glob.extract_from_json_as_np_array("y", classification_training)
 
+# Plot data
+for i in range(len(X)):
+    plt.plot(X, Y, "k.")
+
+plt.show()
+
 # TODO: leer de classificaties
 clf = GaussianNB()
 clf.fit(X, Y)
