@@ -3,7 +3,7 @@ import main as glob
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import accuracy_score
-from sklearn.naive_bayes import GaussianNB
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.linear_model import LogisticRegression
 
 # LESBRIEF Deel 2
@@ -26,7 +26,7 @@ for i in range(len(X)):
 plt.show()
 
 # TODO: leer de classificaties
-clf1 = GaussianNB()
+clf1 = DecisionTreeClassifier()
 clf1.fit(X, Y)
 
 clf2 = LogisticRegression()
