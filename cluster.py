@@ -23,18 +23,28 @@ x = X[...,0]
 y = X[...,1]
 
 # Teken als zwarte punten
-# for i in range(len(x)):
-#     plt.plot(x[i], y[i], "k.")
+for i in range(len(x)):
+    plt.plot(x[i], y[i], "k.")
+    
+plt.show()
 
 # ontdek de clusters mbv kmeans en teken een plot met kleurtjes
-colors = ["red", "blue", "green", "yellow", "purple"]
+colors = ["red", "blue", "green"]
+colors.append("yellow")
+# colors.append("purple")
+
 kmeans = KMeans(len(colors))
 kmeans.fit(X)
-clusters = kmeans.cluster_centers_
+# clusters = kmeans.cluster_centers_
 y_km = kmeans.fit_predict(X)
 
 # Teken de punten in clusters
 for i in range(len(colors)):
     plt.scatter(X[y_km == i, 0], X[y_km == i, 1], color=colors[i])
+
+plt.show()
+
+for i in range(len(colors)):
+    plt.scatter(kmeans.cluster_centers_[i][0], kmeans.cluster_centers_[i][1], color=colors[i])
 
 plt.show()
