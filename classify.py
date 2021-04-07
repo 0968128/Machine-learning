@@ -33,6 +33,12 @@ clf.fit(X, Y)
 #       bijvoordeeld Y_predict
 predicted_y = clf.predict(X)
 
+# Plot het resultaat
+for i in range(len(X)):
+    plt.plot(X, predicted_y, "k.")
+
+plt.show()
+
 # TODO: vergelijk Y_predict met de echte Y om te zien hoe goed je getraind hebt
 correct_guesses = []
 for i in range(len(predicted_y)):
@@ -53,6 +59,11 @@ X_test = glob.extract_from_json_as_np_array("x", classification_test)
 #       vertelt hoeveel er goed waren.
 
 Z = clf.predict(X_test)
+
+for i in range(len(X_test)):
+    plt.plot(X_test, Z, "k.")
+
+plt.show()
 
 # stuur je voorspelling naar de server om te kijken hoe goed je het gedaan hebt
 classification_test = data.classification_test(Z.tolist()) # tolist zorgt ervoor dat het numpy object uit de predict omgezet wordt naar een 'normale' lijst van 1'en en 0'en
