@@ -35,7 +35,7 @@ colors.append("yellow")
 
 kmeans = KMeans(len(colors))
 kmeans.fit(X)
-# clusters = kmeans.cluster_centers_
+clusters = kmeans.cluster_centers_
 y_km = kmeans.fit_predict(X)
 
 # Teken de punten in clusters
@@ -44,6 +44,13 @@ for i in range(len(colors)):
 
 plt.show()
 
+# Teken de cluster centers in eerste instantie
+for i in range(len(colors)):
+    plt.scatter(clusters[i][0], clusters[i][1], color=colors[i])
+
+plt.show()
+
+# Teken de bijgewerkte cluster centers
 for i in range(len(colors)):
     plt.scatter(kmeans.cluster_centers_[i][0], kmeans.cluster_centers_[i][1], color=colors[i])
 
