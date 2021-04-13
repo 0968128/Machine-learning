@@ -21,10 +21,6 @@ X = glob.extract_from_json_as_np_array("x", classification_training)
 # Dit zijn de werkelijke waarden, daarom kan je die gebruiken om te trainen
 Y = glob.extract_from_json_as_np_array("y", classification_training)
 
-# Leer de classificatie logistic regression
-clf = LogisticRegression()
-clf.fit(X, Y)
-
 # Plot data
 for i in range(len(X)):
     if(Y[i] == 0):
@@ -33,6 +29,10 @@ for i in range(len(X)):
         plt.plot(X[i][0], X[i][1], "g.")
 
 plt.show()
+
+# Leer de classificatie logistic regression
+clf = LogisticRegression()
+clf.fit(X, Y)
 
 # Voorspel Y-waarde door te doen alsof je alleen de X hebt
 predicted_Y = clf.predict(X)
