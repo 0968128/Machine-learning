@@ -35,19 +35,19 @@ for i in range(len(X)):
 plt.show()
 
 # Voorspel Y-waarde door te doen alsof je alleen de X hebt
-predicted_y = clf.predict(X)
+predicted_Y = clf.predict(X)
+
+# Vergelijk Y_predict met de echte Y om te zien hoe goed je getraind hebt
+print(accuracy_score(Y, predicted_Y, normalize=False))
 
 # Plot het resultaat van classifier decision tree
 for i in range(len(X)):
-    if(predicted_y[i] == 0):
+    if(predicted_Y[i] == 0):
         plt.plot(X[i][0], X[i][1], "r.")
     else:
         plt.plot(X[i][0], X[i][1], "g.")
 
 plt.show()
-
-# Vergelijk Y_predict met de echte Y om te zien hoe goed je getraind hebt
-print(accuracy_score(Y, predicted_y, normalize=False))
 
 # Classificatie testdata
 classification_test = data.classification_test()
@@ -58,6 +58,13 @@ X_test = glob.extract_from_json_as_np_array("x", classification_test)
 # Voorspel Y-waarde terwijl je alleen de X hebt
 Z = clf.predict(X_test)
 
+# Stuur je voorspelling naar de server om te kijken hoe goed je het gedaan hebt
+classification_test = data.classification_test(Z.tolist())
+
+plt.show()
+
+print("Decision tree accuratie (test): " + str(classification_test))
+
 for i in range(len(X_test)):
     if(Z[i] == 0):
         plt.plot(X_test[i][0], X_test[i][1], "r.")
@@ -65,10 +72,3 @@ for i in range(len(X_test)):
         plt.plot(X_test[i][0], X_test[i][1], "g.")
 
 plt.show()
-
-# Stuur je voorspelling naar de server om te kijken hoe goed je het gedaan hebt
-classification_test = data.classification_test(Z.tolist())
-
-plt.show()
-
-print("Classificatie accuratie (test): " + str(classification_test))
