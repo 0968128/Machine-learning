@@ -198,3 +198,10 @@ dmypy.json
 # End of https://www.gitignore.io/api/python,pycharm
 
 .idea
+
+# My ignored files
+0968128-2021-04-11-classification-test
+
+0968128-classification-training
+
+0968128-clustering-training
